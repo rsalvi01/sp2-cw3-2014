@@ -21,9 +21,9 @@ public class Elevator extends Random{
 	private final int NUMBERFLOORS;
 	private ArrayList<Customer> customerList;
 	private int currentFloor;
-	public int movingDirection; //1 is up, 0 is not set, -1 is down
-	public int numberMoves; //counter to show how many total moves the elevator makes
-	
+	private int movingDirection; //1 is up, 0 is not set, -1 is down
+	private int numberMoves; //counter to show how many total moves the elevator makes
+
 	/**
 	 * Constructor - sets the elevator variables
 	 * This is the constructor to be used in production as it sets the current floor to a random number
@@ -37,7 +37,7 @@ public class Elevator extends Random{
 		this.NUMBERFLOORS = numberFloors;
 		this.currentFloor = randInt(0, numberFloors);
 		movingDirection = 0;
-		numberMoves = 0;
+		setNumberMoves(0);
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class Elevator extends Random{
 		this.NUMBERFLOORS = numberFloors;
 		this.currentFloor = startingFloor;
 		movingDirection = 0;
-		numberMoves = 0;
+		setNumberMoves(0);
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class Elevator extends Random{
 		}
 		
 		//all customers have been dropped off
-		System.out.println("finished in " + numberMoves);
+		//System.out.println("finished in " + numberMoves);
 		
 	}//go()
 	
@@ -121,7 +121,7 @@ public class Elevator extends Random{
 		}
 		
 		currentFloor += movingDirection;
-		numberMoves++;
+		setNumberMoves(getNumberMoves() + 1);
 
 	}//basicMove()
 	
@@ -151,7 +151,7 @@ public class Elevator extends Random{
 		}
 		
 		currentFloor += movingDirection;
-		numberMoves++;		
+		setNumberMoves(getNumberMoves() + 1);		
 	}
 	
 	/**
@@ -178,7 +178,7 @@ public class Elevator extends Random{
 		}
 		
 		currentFloor += movingDirection;
-		numberMoves++;		
+		setNumberMoves(getNumberMoves() + 1);		
 	}
 	
 	/**
@@ -275,6 +275,14 @@ public class Elevator extends Random{
 			}
 		}
 	}//dropOffCustomer()
+
+	public int getNumberMoves() {
+		return numberMoves;
+	}
+
+	public void setNumberMoves(int numberMoves) {
+		this.numberMoves = numberMoves;
+	}
 	
 	
 	

@@ -19,7 +19,7 @@ public class ElevatorTest {
 		customers.add(c);
 		Elevator elevator = new  Elevator(customers, 10, 2);
 		elevator.go(1);
-		assertEquals("moveFloors_singleCustomer 1", 1, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 1", 1, elevator.getNumberMoves());
 
 		//move 8
 		customers = new ArrayList<Customer>();
@@ -27,7 +27,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 2);
 		elevator.go(1);
-		assertEquals("moveFloors_singleCustomer 2", 8, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 8, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 2
 		//customer starts at floor 10 and wants to go to floor 2
@@ -37,7 +37,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 2);
 		elevator.go(1);
-		assertEquals("moveFloors_singleCustomer 2", 16, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 16, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 4 and wants to go to floor 5
@@ -46,7 +46,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 5);
 		elevator.go(1);
-		assertEquals("moveFloors_singleCustomer 2", 20, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 20, elevator.getNumberMoves());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class ElevatorTest {
 		customers.add(c);
 		Elevator elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 2, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 2, elevator.getNumberMoves());
 	
 	}
 	
@@ -73,7 +73,7 @@ public class ElevatorTest {
 		customers.add(c);
 		Elevator elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 10, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 10, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 6 and wants to go to floor 9
@@ -82,7 +82,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 4, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 4, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 7 and wants to go to floor 3
@@ -91,7 +91,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 6, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 6, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 4 and wants to go to floor 1
@@ -100,7 +100,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 4, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 4, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 5 and wants to go to floor 7
@@ -109,7 +109,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 2, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 2, elevator.getNumberMoves());
 		
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 5 and wants to go to floor 0
@@ -118,7 +118,7 @@ public class ElevatorTest {
 		customers.add(c);
 		elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 5, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 5, elevator.getNumberMoves());
 	
 	}
 
@@ -143,7 +143,7 @@ public class ElevatorTest {
 		
 		Elevator elevator = new  Elevator(customers, 10, 5);
 		elevator.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 22, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 22, elevator.getNumberMoves());
 	
 	}
 	
@@ -181,11 +181,11 @@ public class ElevatorTest {
 		
 		Elevator elevator = new  Elevator(customers, 10, 5);
 		elevator.go(1);
-		assertEquals("moveFloors_singleCustomer 2", 24, elevator.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 24, elevator.getNumberMoves());
 		
 		Elevator elevator2 = new  Elevator(customers2, 10, 5);
 		elevator2.go(2);
-		assertEquals("moveFloors_singleCustomer 2", 22, elevator2.numberMoves);
+		assertEquals("moveFloors_singleCustomer 2", 22, elevator2.getNumberMoves());
 		
 	}
 	
@@ -213,7 +213,7 @@ public class ElevatorTest {
 			
 			Elevator elevator = new  Elevator(customers, 10, 5);
 			elevator.go(3);
-			assertEquals("moveFloors_singleCustomer 2", 8, elevator.numberMoves);
+			assertEquals("moveFloors_singleCustomer 2", 8, elevator.getNumberMoves());
 		}
 		
 
