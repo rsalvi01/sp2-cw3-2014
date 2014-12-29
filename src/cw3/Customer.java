@@ -12,7 +12,7 @@ public class Customer extends Random{
 	private int destinationFloor; //randomly selected destination floor
 	private static int id; //unique id for this user
 	private boolean inElevator; //whether they are in the elevator or not
-	private boolean finished; //whether the user has finished their lift journey
+
 	
 	public int getId() {
 		return id;
@@ -42,14 +42,6 @@ public class Customer extends Random{
 		this.inElevator = inElevator;
 	}
 
-	public boolean isFinished() {
-		return finished;
-	}
-
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
-	
 	
 	/**
 	 * @author jbliss02 & rsalvi01
@@ -64,7 +56,6 @@ public class Customer extends Random{
 		this.startingFloor = randInt(0, noOfFloors);
 		this.destinationFloor = randInt(0, noOfFloors);
 		this.inElevator = false;
-		finished = false;
 	}
 	
 	/**
@@ -84,7 +75,7 @@ public class Customer extends Random{
 		this.startingFloor = currentFloor;
 		this.destinationFloor = destinationFloor;
 		this.inElevator = false;
-		finished = false;
+
 	}
 
 

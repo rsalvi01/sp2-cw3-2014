@@ -12,9 +12,11 @@ import java.util.ArrayList;
  * This class runs the logic that defines in which direction the lift
  * should go, counts the number of floors and terminates once all
  * customers have been picked up and dropped off
+ * 
+ * Customers are removed from the customerList once their journey has been completed
  */
 
-public class Elevator {
+public class Elevator extends Random{
 
 	private final int NUMBERFLOORS;
 	private ArrayList<Customer> customerList;
@@ -23,10 +25,31 @@ public class Elevator {
 	public int numberMoves; //counter to show how many total moves the elevator makes
 	
 	/**
-	 * Constructor
+	 * Constructor - sets the elevator variables
+	 * This is the constructor to be used in production as it sets the current floor to a random number
+	 *  * 
 	 * @param customerList - the customers, with their start and destination floors
 	 * @param numberFloors - the number of floors the elevator has to serve
 	 */
+	public Elevator(ArrayList<Customer> customerList, int numberFloors)
+	{
+		this.customerList = customerList;
+		this.NUMBERFLOORS = numberFloors;
+		this.currentFloor = randInt(0, numberFloors);
+		movingDirection = 0;
+		numberMoves = 0;
+	}
+	
+	/**
+	 * Overloaded Constructor - sets the elevator variables
+	 * This is the constructor to be used in test as it sets the startingFloor so can be used to 
+	 * validate elevator strategies match the expected outcome more easily
+	 * 
+	 * @param customerList - the customers, with their start and destination floors
+	 * @param numberFloors - the number of floors the elevator has to serve
+	 * @param startingFloor - the floor the elevator starts on
+	 */
+	
 	public Elevator(ArrayList<Customer> customerList, int numberFloors, int startingFloor)
 	{
 		this.customerList = customerList;
@@ -35,13 +58,16 @@ public class Elevator {
 		movingDirection = 0;
 		numberMoves = 0;
 	}
+	
 	/**
-	 * 
+	 * The main part of the program, when called runs the strategies until
+	 * all customers have completed their strategy
 	 * @param strategy - defines which lift strategy to run 
 	 */
 	
 	public void go(int strategy)
 	{
+		//loop through the customer list until the list has no elements
 		while(customerList.size() > 0)
 		{			
 			pickUpCustomer();
@@ -55,15 +81,18 @@ public class Elevator {
 				if(customerList.size() > 0) {superMove();}
 				break;	
 			case 3:
+				//System.out.println(customerList.size());
+				//printCustomers();
 				if(customerList.size() > 0) {superMove2();}
 				break;
 			}
 			
-			
 		}
 		
+		//all customers have been dropped off
 		System.out.println("finished in " + numberMoves);
-	}
+		
+	}//go()
 	
 	/**
 	 * the default lift strategy, one that
@@ -98,7 +127,7 @@ public class Elevator {
 	
 	
 	/**
-	 * superMove() - the second lift strategy, checks whether the lift really has to move upwards
+	 * superMove - the second lift strategy, checks whether the lift really has to move upwards
 	 * rather than just blindly moving upwards. Still moves each floor, one by one
 	 * 
 	 * Loops through the list of customers to see whether any customer needs to travel upwards,
@@ -126,7 +155,7 @@ public class Elevator {
 	}
 	
 	/**
-	 * superMove2() - the third lift strategy. Upgrades on superMove1() by only stopping at floors
+	 * superMove2 - the third lift strategy. Upgrades on superMove1() by only stopping at floors
 	 * that are necessary.
 	 * 
 	 * Still has a preference to move up rather than down but can move up or down many floors at once
@@ -138,22 +167,32 @@ public class Elevator {
 		{
 			if (customerList.get(i).isInElevator() && customerList.get(i).getDestinationFloor() > currentFloor)  
 			{
-				floorsToMove(1);
+				floorsToMove(1); break;
 			}
 			else if (!customerList.get(i).isInElevator() && customerList.get(i).getStartingFloor() > currentFloor)
 			{
-				floorsToMove(1);
+				floorsToMove(1);break;
 			}
-			else {floorsToMove(-1);}
+			else {
+				floorsToMove(-1); break;}
 		}
 		
 		currentFloor += movingDirection;
 		numberMoves++;		
 	}
 	
-	//1 is up, -1 is down
+	/**
+	 * Loops through the customer list to see how many floors to move to complete the next step (i.e. collect
+	 * or drop off a customer)
+	 * 
+	 * Sets the class variable - movingDirection with the number of floors to move
+	 * 
+	 * @param direction - which way the lift is moving 1 is up, -1 is down
+	 * 	 
+	 * */	
 	private void floorsToMove(int direction)
 	{
+
 		if(direction == 1)
 		{
 			int nextFloorUp = NUMBERFLOORS;
@@ -202,11 +241,17 @@ public class Elevator {
 	}//floorsToMove
 	
 
+	/**
+	 * Called each time a lift arrives at a floor, iterates through the customer list
+	 * to see whether a customer is here waiting to be picked up
+	 * if so sets the inElevator variable on that customer 
+	 * 	 
+	 * */	
 	private void pickUpCustomer()
 	{
 		for(int i = 0; i < customerList.size(); i++)
 		{
-			if(customerList.get(i).getStartingFloor() == this.currentFloor)
+			if(customerList.get(i).getStartingFloor() == this.currentFloor && !customerList.get(i).isInElevator())
 			{
 				customerList.get(i).setInElevator(true);
 			}
@@ -214,6 +259,12 @@ public class Elevator {
 		
 	}//pickUpCustomer()
 	
+	
+	/**
+	 * Called each time a lift arrives at a floor, iterates through the customer list
+	 * to see whether a customer is in the lift waiting to be dropped off
+	 * if so removes the customer from the list to show their journey has eneded 
+	 * */	
 	private void dropOffCustomer()
 	{
 		for(int i = customerList.size() - 1; i >= 0; i--)
@@ -223,7 +274,7 @@ public class Elevator {
 				customerList.remove(i);
 			}
 		}
-	}
+	}//dropOffCustomer()
 	
 	
 	

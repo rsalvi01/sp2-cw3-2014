@@ -10,8 +10,8 @@ import org.junit.Test;
 public class ElevatorTest {
 
 
-@Test
-public void moveFloors_singleCustomer()
+	@Test
+	public void moveFloors_singleCustomer()
 	{
 		//move one
 		Customer c = new Customer(10, 2, 3); //customer who wants to move one floor
@@ -49,7 +49,7 @@ public void moveFloors_singleCustomer()
 		assertEquals("moveFloors_singleCustomer 2", 20, elevator.numberMoves);
 	}
 
-@Test
+	@Test
 	public void superMoveWithOneCustomer()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -193,25 +193,30 @@ public void moveFloors_singleCustomer()
 	@Test
 	public void superMove2WithManyCustomers()
 	{
-		//lift has 10 floors and starts at floor 5
-		//customer starts at floor 4 and wants to go to floor 5
-		ArrayList<Customer> customers = new ArrayList<Customer>();
-		Customer c = new Customer(10);
-		customers.add(c);
-		c = new Customer(10, 6, 9);
-		customers.add(c);
-		c = new Customer(10, 7, 3);
-		customers.add(c);
-		c = new Customer(10, 4, 1);
-		customers.add(c);
-		c = new Customer(10, 5, 7);
-		customers.add(c);
-		c = new Customer(10, 5, 0);
-		customers.add(c);
 		
-		Elevator elevator = new  Elevator(customers, 10, 5);
-		elevator.go(3);
-		assertEquals("moveFloors_singleCustomer 2", 8, elevator.numberMoves);
+		for(int i = 0; i < 11; i++){
+			
+			//lift has 10 floors and starts at floor 5
+			ArrayList<Customer> customers = new ArrayList<Customer>();
+			Customer c = new Customer(10, 7, 8);
+			customers.add(c);
+			c = new Customer(10, 6, 9);
+			customers.add(c);
+			c = new Customer(10, 7, 3) ;
+			customers.add(c);
+			c = new Customer(10, 4, 1);
+			customers.add(c);
+			c = new Customer(10, 5, 7);
+			customers.add(c);
+			c = new Customer(10, 5, 0);
+			customers.add(c);
+			
+			Elevator elevator = new  Elevator(customers, 10, 5);
+			elevator.go(3);
+			assertEquals("moveFloors_singleCustomer 2", 8, elevator.numberMoves);
+		}
+		
+
 	
 	}
 
