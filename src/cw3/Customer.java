@@ -4,6 +4,7 @@ package cw3;
  * @author jbliss02 & rsalvi01
  * Customer class - holds the information about a single elevator customer
  * @param noOfFloors
+ * 
  */
 
 public class Customer extends Random{
