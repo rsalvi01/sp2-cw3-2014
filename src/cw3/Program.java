@@ -34,8 +34,7 @@ public class Program {
 		
 		createCustomerList(numberCustomers,numberFloors);
 		createBuilding(customerList,numberFloors);
-		
-		building.elevator.go();
+
 		
 	}
 	
