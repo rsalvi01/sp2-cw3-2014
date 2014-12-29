@@ -31,7 +31,6 @@ public class Program {
 		numberCustomers = 8;
 		
 		customerList = new ArrayList<Customer>();
-		
 		createCustomerList(numberCustomers,numberFloors);
 		createBuilding(customerList,numberFloors);
 
@@ -43,6 +42,7 @@ public class Program {
 	 * Creates a random start and destination floor for each customer
 	 * If the customer has the same start and destination floor then the customer
 	 * is not added to the list as their journey is considered finished
+	 * 
 	 * @param  numberCustomers the number of individual customers to create
 	 * @param  numberFloors the number of floors the building has
 
@@ -51,7 +51,7 @@ public class Program {
 	{
 		for(int i = 0; i < numberCustomers; i++)
 		{
-			Customer c = new Customer(numberFloors, randInt(0, numberFloors), randInt(0, numberFloors));
+			Customer c = new Customer(numberFloors);
 			if(c.getStartingFloor() != c.getDestinationFloor())
 			{
 				customerList.add(c);
@@ -61,28 +61,10 @@ public class Program {
 	
 	private static void createBuilding(ArrayList<Customer> customerList, int numberFloors)
 	{
-		building = new Building(customerList, numberFloors, randInt(0, numberFloors));
+		building = new Building(customerList, numberFloors);
 	}
 	
-	/**..
-	* Returns a pseudo-random number between min and max, inclusive.
-	* 13 cannot be assigned as a starting or destination floor
-	*
-	* @param min Minimum value
-	* @param max Maximum value. Must be greater than min.
-	* @return Integer between min and max, inclusive.
-	*/
-	public static int randInt(int min, int max)
-	{
-		int value = 13;
-		
-		while (value == 13)
-		{
-			value = min + (int)(Math.random() * ((max - min) + 1));
-		}
-		
-		return value;
-	}
+
 	
 	
 	

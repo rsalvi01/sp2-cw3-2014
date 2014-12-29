@@ -9,15 +9,13 @@ import java.util.ArrayList;
  * @author jbliss02 & rsalvi01
  * Creates ONE building
  */
-public class Building {
+public class Building extends Random{
 
 	public Elevator elevator;
 
-	public Building(ArrayList<Customer> customerList, int numberFloors, int currentFloor)
+	public Building(ArrayList<Customer> customerList, int numberFloors)
 	{
-		elevator = new Elevator(customerList, numberFloors, currentFloor);		
+		elevator = new Elevator(customerList, numberFloors, randInt(0,numberFloors));		
 	}
-	
-	
 	
 }

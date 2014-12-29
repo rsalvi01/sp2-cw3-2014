@@ -5,44 +5,13 @@ import static org.junit.Assert.*;
 import java.awt.List;
 import java.util.ArrayList;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ElevatorTest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	//@Test
-	public void test2() {
-		fail("Not yet implemented");
-	}
-	
-	//@Test
-	public void basicTest(){
-		
-		Customer c = new Customer(10, 2, 2);
-		ArrayList<Customer> customers = new ArrayList<Customer>();
-		customers.add(c);
-		
-		Elevator elevator = new  Elevator(customers, 10, 2);
-
-		elevator.pickUpCustomer();
-		assertEquals("test", true, customers.get(0).isInElevator());
-		
-		elevator.dropOffCustomer();
-		assertEquals("test 2", 0, customers.size());
-
-	}
-	
-//	@Test
-	public void moveFloors_singleCustomer()
+@Test
+public void moveFloors_singleCustomer()
 	{
 		//move one
 		Customer c = new Customer(10, 2, 3); //customer who wants to move one floor
@@ -79,9 +48,8 @@ public class ElevatorTest {
 		elevator.go(1);
 		assertEquals("moveFloors_singleCustomer 2", 20, elevator.numberMoves);
 	}
-	
-	
-//	@Test
+
+@Test
 	public void superMoveWithOneCustomer()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -95,7 +63,7 @@ public class ElevatorTest {
 	
 	}
 	
-//	@Test
+	@Test
 	public void superMoveWithOneCustomer1()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -153,8 +121,8 @@ public class ElevatorTest {
 		assertEquals("moveFloors_singleCustomer 2", 5, elevator.numberMoves);
 	
 	}
-	
-//	@Test
+
+	@Test
 	public void superMoveWithManyCustomers()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -179,7 +147,7 @@ public class ElevatorTest {
 	
 	}
 	
-	//@Test
+	@Test
 	public void comparingMoves()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -198,7 +166,7 @@ public class ElevatorTest {
 		c2 = new Customer(10, 7, 3);
 		customers.add(c);
 		customers2.add(c2);
-		c = new Customer(10, 4, 1);
+		c = new Customer(10, 4, 1); 
 		c2 = new Customer(10, 4, 1);
 		customers.add(c);
 		customers2.add(c2);
@@ -221,35 +189,14 @@ public class ElevatorTest {
 		
 	}
 	
-//	@Test
-	public void TestFloorsToMove(){
-		ArrayList<Customer> customers = new ArrayList<Customer>();
-		
-		Customer c = new Customer(10, 2, 9);
-		customers.add(c);
-//		c = new Customer(10, 6, 9);
-//		customers.add(c);
-//		c = new Customer(10, 7, 3);
-//		customers.add(c);
-//		c = new Customer(10, 4, 1);
-//		customers.add(c);
-//		c = new Customer(10, 5, 7);
-//		customers.add(c);
-//		c = new Customer(10, 5, 0);
-//		customers.add(c);
-//		
-		Elevator elevator = new  Elevator(customers, 10, 5);
-		elevator.floorsToMove(-1);
-		assertEquals("moveFloors_singleCustomer 2", -3, elevator.movingDirection);
-	}
-	
+
 	@Test
 	public void superMove2WithManyCustomers()
 	{
 		//lift has 10 floors and starts at floor 5
 		//customer starts at floor 4 and wants to go to floor 5
 		ArrayList<Customer> customers = new ArrayList<Customer>();
-		Customer c = new Customer(10, 2, 9);
+		Customer c = new Customer(10);
 		customers.add(c);
 		c = new Customer(10, 6, 9);
 		customers.add(c);

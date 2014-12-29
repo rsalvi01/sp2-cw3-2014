@@ -9,22 +9,23 @@ import java.util.ArrayList;
  * @author jbliss02 & rsalvi01
  *
  * Creates a single instance of an elevator that serves a building
- * The maximum number of floors 
- *
+ * This class runs the logic that defines in which direction the lift
+ * should go, counts the number of floors and terminates once all
+ * customers have been picked up and dropped off
  */
+
 public class Elevator {
 
 	private final int NUMBERFLOORS;
 	private ArrayList<Customer> customerList;
 	private int currentFloor;
-	private int startingFloor;
 	public int movingDirection; //1 is up, 0 is not set, -1 is down
-	public int numberMoves;
+	public int numberMoves; //counter to show how many total moves the elevator makes
 	
 	/**
 	 * Constructor
-	 * @param customerList 
-	 * @param numberFloors
+	 * @param customerList - the customers, with their start and destination floors
+	 * @param numberFloors - the number of floors the elevator has to serve
 	 */
 	public Elevator(ArrayList<Customer> customerList, int numberFloors, int startingFloor)
 	{
@@ -64,6 +65,14 @@ public class Elevator {
 		System.out.println("finished in " + numberMoves);
 	}
 	
+	/**
+	 * the default lift strategy, one that
+	 * moves up and down each floor one by one, stopping at each
+	 * 
+	 * If lift is not moving then move up, unless we are at top floor
+	 * If lift is moving up then continue to move up, unless we are at top; in which case move down
+	 * If lift is moving down then continue to move down, unless we are at bottonm; in which case move up
+	 * 	 */	
 	private void basicMove()
 	{
 		
@@ -88,6 +97,15 @@ public class Elevator {
 	}//basicMove()
 	
 	
+	/**
+	 * superMove() - the second lift strategy, checks whether the lift really has to move upwards
+	 * rather than just blindly moving upwards. Still moves each floor, one by one
+	 * 
+	 * Loops through the list of customers to see whether any customer needs to travel upwards,
+	 * or whether we need to travel upwards to collect a customer. As soon as we find we need to
+	 * move upwards then the loop is exited, as there is no need to iterate over the remaining elements
+	 * 
+	 * 	 */	
 	private void superMove()
 	{				
 		for (int i = 0; i < customerList.size(); i++)
@@ -107,6 +125,13 @@ public class Elevator {
 		numberMoves++;		
 	}
 	
+	/**
+	 * superMove2() - the third lift strategy. Upgrades on superMove1() by only stopping at floors
+	 * that are necessary.
+	 * 
+	 * Still has a preference to move up rather than down but can move up or down many floors at once
+	 * 
+	 * 	 */	
 	private void superMove2()
 	{				
 		for (int i = 0; i < customerList.size(); i++)
@@ -127,7 +152,7 @@ public class Elevator {
 	}
 	
 	//1 is up, -1 is down
-	public void floorsToMove(int direction)
+	private void floorsToMove(int direction)
 	{
 		if(direction == 1)
 		{
@@ -177,7 +202,7 @@ public class Elevator {
 	}//floorsToMove
 	
 
-	public void pickUpCustomer()
+	private void pickUpCustomer()
 	{
 		for(int i = 0; i < customerList.size(); i++)
 		{
@@ -189,7 +214,7 @@ public class Elevator {
 		
 	}//pickUpCustomer()
 	
-	public void dropOffCustomer()
+	private void dropOffCustomer()
 	{
 		for(int i = customerList.size() - 1; i >= 0; i--)
 		{

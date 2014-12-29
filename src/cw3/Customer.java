@@ -1,12 +1,18 @@
 package cw3;
 
-public class Customer {
+/**
+ * @author jbliss02 & rsalvi01
+ * Customer class - holds the information about a single elevator customer
+ * @param noOfFloors
+ */
 
-	private int startingFloor;
-	private int destinationFloor;
-	private static int id;
-	private boolean inElevator;
-	private boolean finished;
+public class Customer extends Random{
+
+	private int startingFloor; //randomly selected starting floor
+	private int destinationFloor; //randomly selected destination floor
+	private static int id; //unique id for this user
+	private boolean inElevator; //whether they are in the elevator or not
+	private boolean finished; //whether the user has finished their lift journey
 	
 	public int getId() {
 		return id;
@@ -47,11 +53,31 @@ public class Customer {
 	
 	/**
 	 * @author jbliss02 & rsalvi01
-	 * Creates ONE customer and sets the starting and destination floors 
-	 * @param noOfFloors
+	 * Creates ONE customer and sets the starting and destination floors using the random function from the base class
+	 * This is the constructor that will be used in the production system
+	 * @param noOfFloors - the number of floors this customer can travel across (i.e. how many floors in the building)
 	 */
 	
+	public Customer(int noOfFloors)
+	{
+		id++;
+		this.startingFloor = randInt(0, noOfFloors);
+		this.destinationFloor = randInt(0, noOfFloors);
+		this.inElevator = false;
+		finished = false;
+	}
 	
+	/**
+	 * @author jbliss02 & rsalvi01
+	 * Overloaded constructor with additional parameters
+	 * Creates ONE customer and sets the starting and destination floors
+	 * This is the constructor that will be used whilst testing as we can define the start and end floors to test
+	 * each strategy is working as expected
+	 * 
+	 * @param noOfFloors - the number of floors this customer can travel across (i.e. how many floors in the building)
+	 * @param currentFloor - what floor the customer starts on
+	 * @param destinationFloor - what flooe the customer wants to move to
+	 */
 	public Customer(int noOfFloors, int currentFloor, int destinationFloor)
 	{
 		id++;
