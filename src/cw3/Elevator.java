@@ -67,6 +67,7 @@ public class Elevator extends Random{
 	
 	public void go(int strategy)
 	{
+		setNumberMoves(0);
 		//loop through the customer list until the list has no elements
 		while(customerList.size() > 0)
 		{			
@@ -77,16 +78,13 @@ public class Elevator extends Random{
 			case 1:
 				if(customerList.size() > 0) {basicMove();}
 				break;
+//			case 2:
+//				if(customerList.size() > 0) {superMove();}
+//				break;	
 			case 2:
-				if(customerList.size() > 0) {superMove();}
-				break;	
-			case 3:
-				//System.out.println(customerList.size());
-				//printCustomers();
 				if(customerList.size() > 0) {superMove2();}
 				break;
-			}
-			
+			}		
 		}
 		
 		//all customers have been dropped off

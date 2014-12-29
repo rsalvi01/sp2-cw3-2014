@@ -13,7 +13,6 @@ public class Customer extends Random{
 	private static int id; //unique id for this user
 	private boolean inElevator; //whether they are in the elevator or not
 
-	
 	public int getId() {
 		return id;
 	}
@@ -42,7 +41,6 @@ public class Customer extends Random{
 		this.inElevator = inElevator;
 	}
 
-	
 	/**
 	 * @author jbliss02 & rsalvi01
 	 * Creates ONE customer and sets the starting and destination floors using the random function from the base class
@@ -67,7 +65,7 @@ public class Customer extends Random{
 	 * 
 	 * @param noOfFloors - the number of floors this customer can travel across (i.e. how many floors in the building)
 	 * @param currentFloor - what floor the customer starts on
-	 * @param destinationFloor - what flooe the customer wants to move to
+	 * @param destinationFloor - what floor the customer wants to move to
 	 */
 	public Customer(int noOfFloors, int currentFloor, int destinationFloor)
 	{
@@ -75,8 +73,8 @@ public class Customer extends Random{
 		this.startingFloor = currentFloor;
 		this.destinationFloor = destinationFloor;
 		this.inElevator = false;
-
 	}
+
 
 
 }

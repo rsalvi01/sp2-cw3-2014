@@ -4,6 +4,8 @@
 package cw3;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,7 +22,7 @@ public class Program {
 	/**
 	 * @param args
 	 */
-	
+	private static final int NUMBERSTRATEGIES = 2; //the number of lift strategies supported
 	private static ArrayList<Customer> customerList; 
 	private static Building building;
 	private static int numberFloors;
@@ -36,19 +38,50 @@ public class Program {
 	 */
 	public static void main(String[] args) {
 		
+		
 		getUserInput(); //ask the user to define the number of customers to ferry, and the number of floors in the building
 		createCustomerList(numberCustomers,numberFloors); //initialise and populate the list of customers
-		createBuilding(customerList,numberFloors); //initialise the building
 		
-		//report the results
+		//run each of the strategies and report the results
 		System.out.println(String.valueOf(numberCustomers) + " customers require the lift in a building with " + 
-						   String.valueOf(numberFloors) + " floors");
+				   String.valueOf(numberFloors) + " floors");
 		
-		building.elevator.go(3);
-		System.out.println("Strategy 3 made " + building.elevator.getNumberMoves() + " moves");
+		ArrayList<Integer> strategies = returnStrategies(); //get a list of each strategy id
+		ArrayList<Integer> results = new ArrayList<Integer>(); //holds the number of results for each strategy so can be compared
+		
+		//run the main elevator method for each strategy
+		for(int i = 0; i < strategies.size(); i++){
 			
+			ArrayList<Customer> copy = new ArrayList<Customer>(customerList); //take a copy of the class variable so each strategy starts with the same, unaltered customerList
+			createBuilding(copy,numberFloors); //initialise the building
+			building.elevator.go(strategies.get(i)); //run the strategy
+			results.add(building.elevator.getNumberMoves()); //add the number of moves to the results arrayList
+			
+			//report and compare the results
+			String stResult = "Strategy " + String.valueOf(strategies.get(i)) +" made " + building.elevator.getNumberMoves() + " moves";
+			
+			if(i > 0){ //more than one strategy has run so we can compare to the last
+				
+				double difference = (results.get(i - 1) / results.get(i)); 
+				
+				if(difference > 1){
+					stResult += " which is " + String.valueOf(difference * 100) + "% more efficient than strategy " + String.valueOf(strategies.get(i - 1));
+				}
+				else if(difference < 1){
+					stResult += " which is " + String.valueOf(difference * 100) + "% less efficient than strategy " + String.valueOf(strategies.get(i - 1));					
+				}
+				else 
+				{
+					stResult += " which has the same efficiency as strategy " + String.valueOf(strategies.get(i - 1));						
+				}
+				
+			}
+
+			System.out.println(stResult);
+		}
+				
 	}
-	
+		
 	/**
 	 * Uses the scanner class to prompt the user for their inputs
 	 * for the number of customers and number of floors the elevator has
@@ -119,12 +152,20 @@ public class Program {
 		building = new Building(customerList, numberFloors);
 	}
 	
-
 	
-	
-	
-	
-	
+	/**
+	 * Returns an array list of integers, each integer relates to a lift strategy
+	 * 
+	 */
+	private static ArrayList<Integer> returnStrategies()
+	{
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		for(int i = 1; i < NUMBERSTRATEGIES + 1; i++){
+			ret.add(i);
+		}
+		return ret;
+		
+	}//returnStrategies()
 	
 
 }

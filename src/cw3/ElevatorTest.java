@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ElevatorTest {
 
 
-	@Test
+	//@Test
 	public void moveFloors_singleCustomer()
 	{
 		//move one
@@ -49,7 +49,7 @@ public class ElevatorTest {
 		assertEquals("moveFloors_singleCustomer 2", 20, elevator.getNumberMoves());
 	}
 
-	@Test
+	//@Test
 	public void superMoveWithOneCustomer()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -63,7 +63,7 @@ public class ElevatorTest {
 	
 	}
 	
-	@Test
+	//@Test
 	public void superMoveWithOneCustomer1()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -122,7 +122,7 @@ public class ElevatorTest {
 	
 	}
 
-	@Test
+	//@Test
 	public void superMoveWithManyCustomers()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -147,7 +147,7 @@ public class ElevatorTest {
 	
 	}
 	
-	@Test
+	//@Test
 	public void comparingMoves()
 	{
 		//lift has 10 floors and starts at floor 5
@@ -190,7 +190,7 @@ public class ElevatorTest {
 	}
 	
 
-	@Test
+	//@Test
 	public void superMove2WithManyCustomers()
 	{
 		
@@ -215,9 +215,36 @@ public class ElevatorTest {
 			elevator.go(3);
 			assertEquals("moveFloors_singleCustomer 2", 8, elevator.getNumberMoves());
 		}
-		
-
+			
+	}
 	
+	@Test
+	public void doComparision()
+	{
+		for(int i = 1; i < 10; i++){
+			
+			ArrayList<Customer> customers = new ArrayList<Customer>();
+			
+			for(int n = 1; n < 5; i++){
+				Customer c = new Customer(i);
+				customers.add(c);
+			}
+
+			ArrayList<Customer> copy = new ArrayList<Customer>(customers);
+			
+			Elevator elevator = new  Elevator(customers, i);
+			elevator.go(1);
+			
+			int a = elevator.getNumberMoves();
+			
+			//System.out.println(elevator.getNumberMoves());
+			
+			elevator = new  Elevator(copy, i);
+			elevator.go(2);
+			System.out.println(String.valueOf(elevator.getNumberMoves()) + " v " +  String.valueOf(a));
+		
+		}
+
 	}
 
 }
